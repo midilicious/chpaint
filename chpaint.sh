@@ -1,20 +1,32 @@
-#! /bin/bash
+#! /bin/bash -x
 
 # Where it all comes together
 
-source args.sh
-source mod.sh
-source owner.sh
-source permisson.sh
+#source args.sh
+#source owner.sh
+#source permisson.sh
+
+
+    unset OPTIND
+
+collect_args () {
+    default=0
+    while getopts ":d" arg;do
+        echo "we made it"
+        echo "$arg"
+        if [[ "$arg" == "d" ]];then
+            default=1
+        fi
+    done
+}
 
 main () {
-	collect_args    $FLAGS $EXAMPLE $TARGET
-    get_mod         $MOD $EXAMPLE
-    get_owner       $OWNER $EXAMPLE
-    get_permisson   $PERMISSIONS $EXAMPLE
-    set_mod         $MOD $TARGET
-    set_owner       $OWNER $TARGET
-    set_permisson   $PERMISSIONS $TARGET
+    collect_args
+    echo $default
+#   get_owner       $OWNER $EXAMPLE
+#   get_permisson   $PERMISSIONS $EXAMPLE
+#   set_owner       $OWNER $TARGET
+#   set_permisson   $PERMISSIONS $TARGET
 }
 
 main
